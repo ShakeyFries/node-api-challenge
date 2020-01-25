@@ -19,6 +19,21 @@ router.get('/', ( req,res ) => {
     });
 });
 
+router.get('/:id', ( req,res ) => {
+  const {id} = req.params;
+  
+  project.get(id)
+    .then(go => {
+      res.status(200).json(go);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: 'error retrieving'
+      });
+    });
+});
+
 //=========================== Delete ========================================
 router.delete('/:id', validateProjectId, ( req,res ) => {
 
